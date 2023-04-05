@@ -10,8 +10,12 @@ module V1
     end
 
     def create
-      new_journal = Journal.create(safe_params)
-      render json: { journal: new_journal }
+      if safe_params[:name].present?
+        new_journal = Journal.create(safe_params)
+        render json: { journal: new_journal }
+      else
+        render json: { error: 'You must provide a name for the Journal' }
+      end
     end
 
     def show
