@@ -8,14 +8,12 @@ class Journal
   # DIY in memory CRUD class methods...
 
   def self.load_seeds
-    seed_data = [
-      { name: "Shakespeare's Journal", id: SecureRandom.uuid },
-      { name: "Chiquito's Journal", id: SecureRandom.uuid },
-      { name: "Rajnikanth's Journal", id: SecureRandom.uuid },
-      { name: "Rando's Journal", id: SecureRandom.uuid }
-    ]
-
-    seed_data.map { |data| new(data) }
+    Author.seeds.map do |author_seed|
+      new({
+        id: SecureRandom.uuid,
+        name: "#{author_seed[:name]}'s Journal"
+      })
+    end
   end
 
   def self.all
@@ -58,14 +56,5 @@ class Journal
   def destroy
     Journal.all = Journal.find_all_other_records(id)
     self
-  end
-
-  def fakers
-    [
-      Faker::Quote,
-      Faker::Quotes::Chiquito,
-      Faker::Quotes::Rajnikanth,
-      Faker::Quotes::Shakespeare
-    ]
   end
 end
