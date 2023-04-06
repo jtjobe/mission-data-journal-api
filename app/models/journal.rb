@@ -9,10 +9,7 @@ class Journal
 
   def self.load_seeds
     Author.seeds.map do |author_seed|
-      new({
-        id: SecureRandom.uuid,
-        name: "#{author_seed[:name]}'s Journal"
-      })
+      new({ name: "#{author_seed[:name]}'s Journal" })
     end
   end
 
@@ -41,9 +38,9 @@ class Journal
   attr_reader :id
   attr_accessor :name
 
-  def initialize(hash)
+  def initialize(params)
     @id = SecureRandom.uuid
-    @name = hash[:name]
+    @name = params[:name]
   end
 
   def update(params)
