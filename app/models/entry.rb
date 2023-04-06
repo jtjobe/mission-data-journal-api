@@ -6,11 +6,8 @@
 class Entry
 
   def self.load_seeds
-    Journal.all # ensure Journals have been loaded
-
     Author.seeds.flat_map do |author_seed|
       klass = author_seed[:klass]
-      author = klass.name.split("::").third
       journal = Journal.all.find { |journal| journal.name.include?(author_seed[:name]) }
       
       10.times.map do

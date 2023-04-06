@@ -20,8 +20,8 @@ RSpec.describe 'Entries Requests' do
     it 'returns the correct journal' do
       get "/v1/journals/#{entry.journal_id}/entries/#{entry.id}"
 
-      expect(params['entry']['id']).to eq(entry.id)
-      expect(params['entry']['journal_id']).to eq(entry.journal_id)
+      expect(json['entry']['id']).to eq(entry.id)
+      expect(json['entry']['journal_id']).to eq(entry.journal_id)
     end
   end
 end
